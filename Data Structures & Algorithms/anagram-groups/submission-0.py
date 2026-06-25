@@ -1,0 +1,10 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        final = []
+        group = {}
+        for word in strs: 
+            key = tuple(sorted(word))
+            if key not in group: 
+                group[key] = []
+            group[key].append(word)
+        return list(group.values())

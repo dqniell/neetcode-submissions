@@ -1,16 +1,25 @@
+import heapq
+from collections import Counter
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        import heapq 
-        from collections import Counter
-
         count = Counter(nums)
         heap = []
-        for num, freq in count.items(): 
+        
+        #iterate through count.items() bc that contains the num:count of Counter
+        for num, freq in count.items():
+            #push it onto the heap
             heapq.heappush(heap, (freq, num))
-            if len(heap) > k: 
+            
+            #if the length of the heap is greater than k, we are no longer tracking top k, 
+            #so we need to pop the smallest k
+            if len(heap) > k:
                 heapq.heappop(heap)
-
-        arr = []
-        for freq, num in heap: 
-            arr.append(num)
-        return arr
+        
+        #printing out the result
+        result = []
+        for i in range(k):
+            freq, num = heapq.heappop(heap)
+            result.append(num)
+        
+        return result

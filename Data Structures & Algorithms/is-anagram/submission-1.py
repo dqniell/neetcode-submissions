@@ -1,20 +1,12 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        map_s = {}
-        map_t = {}
-        for char in s: 
-            if char in map_s: 
-                map_s[char] += 1
-            else: 
-                map_s[char] = 1
-        
-        for char in t: 
-            if char in map_t: 
-                map_t[char] += 1
-            else: 
-                map_t[char] = 1
-
-        if (map_s) == (map_t): 
-            return True
-        else: 
+        if len(s) != len(t): 
             return False
+
+        s_dict = {}
+        t_dict = {}
+
+        for i in range(len(s)): 
+            s_dict[s[i]] = s_dict.get(s[i], 0) + 1
+            t_dict[t[i]] = t_dict.get(t[i], 0) + 1
+        return s_dict == t_dict

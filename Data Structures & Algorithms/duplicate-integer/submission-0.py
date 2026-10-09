@@ -1,9 +1,7 @@
 class Solution:
     def hasDuplicate(self, nums: List[int]) -> bool:
-        sett = set()
-        for num in nums: 
-            if num in sett: 
-                return True
-            else: 
-                sett.add(num)
+        for i in range(0, len(nums)): 
+            for j in range(i + 1, len(nums)): 
+                if nums[i] == nums[j]:
+                    return True
         return False

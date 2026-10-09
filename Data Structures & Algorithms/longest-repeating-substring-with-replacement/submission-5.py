@@ -12,17 +12,10 @@ class Solution:
         l = 0
         maxf = 0
         for r in range(len(s)):
-            #add curr character to the frequency map
-            #if s[r] doesnt exist, return 0
             count[s[r]] = 1 + count.get(s[r], 0)
-
-            #after adding s[r] to window, check if its now the most freq character
-            #maxf always holds the highest freq seen in the curr window
             maxf = max(maxf, count[s[r]])
 
-            #loop triggers when the window is invalid --> too many replacements needed
             while (r - l + 1) - maxf > k:
-                #shrink window from left
                 count[s[l]] -= 1
                 l += 1
             res = max(res, r - l + 1)

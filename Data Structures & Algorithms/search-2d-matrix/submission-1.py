@@ -3,35 +3,34 @@ class Solution:
         if not matrix or not matrix[0]:
             return False
 
-        rows, cols = len(matrix), len(matrix[0])
+        rows = len(matrix)
+        col = len(matrix[0])
 
         top, bottom = 0, rows - 1
         row = -1
 
         while top <= bottom:
             mid = (top + bottom) // 2
-
-            if matrix[mid][0] <= target <= matrix[mid][cols - 1]:
+            if matrix[mid][0] <= target:
                 row = mid
-                break
-            elif target < matrix[mid][0]:
-                bottom = mid - 1
-            else:
                 top = mid + 1
+            else:
+                bottom = mid - 1
 
         if row == -1:
             return False
 
-        left, right = 0, cols - 1
+        if target > matrix[row][col - 1]:
+            return False
 
+        left, right = 0, col - 1
         while left <= right:
             mid = (left + right) // 2
-
             if matrix[row][mid] == target:
                 return True
-            elif target < matrix[row][mid]:
-                right = mid - 1
-            else:
+            elif matrix[row][mid] < target:
                 left = mid + 1
+            else:
+                right = mid - 1
 
         return False
